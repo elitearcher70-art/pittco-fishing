@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "navigation": {
+    "drawer": [
+      {"id":"community","label":"Community","enabled":true},
+      {"id":"lakes","label":"Explore Lakes","enabled":true},
+      {"id":"settings","label":"Profile & Settings","enabled":true},
+      {"id":"merch","label":"Merch Store","enabled":false},
+      {"id":"youtube","label":"YouTube","enabled":false},
+      {"id":"instagram","label":"Instagram","enabled":false},
+      {"id":"facebook","label":"Facebook","enabled":false},
+      {"id":"tiktok","label":"TikTok","enabled":false}
+    ]
+  },
+  "profileDefaults": {
+    "homeLake":"Sardis Lake",
+    "primarySpecies":"Largemouth Bass",
+    "fishingStyle":"Versatile",
+    "units":"imperial",
+    "catchPrivacy":"private",
+    "notifications":true
+  },
+  "privacy": {
+    "exactCatchGpsPublicByDefault": false,
+    "waypointsPublicByDefault": false,
+    "communityLocationDefault": "lake"
+  },
+  "social": {
+    "youtube":"",
+    "instagram":"",
+    "facebook":"",
+    "tiktok":""
+  },
+  "merch": {
+    "provider":"shopify-ready",
+    "storeUrl":""
+  }
+}
