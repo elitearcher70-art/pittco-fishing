@@ -4,14 +4,15 @@
   "lakes": {
     "tx-fork": {
       "provider": "twdb",
-      "status": "ingest-ready",
+      "status": "ready",
       "survey": "2009-10",
       "reference_pool_ft": 403.0,
       "vertical_datum": "NGVD29",
       "contour_interval_ft": 5,
       "asset": "data/bathymetry/tx-fork.geojson",
       "source_kind": "elevation-to-depth",
-      "navigation": false
+      "navigation": false,
+      "built_by": "github-actions"
     },
     "tx-sam-rayburn": {
       "provider": "twdb",
