@@ -1,32 +1,41 @@
 # PittCo deployment notes
 
-## Current safe state
+## Current production state
 
-- Production remains on the known-working chunked Vercel deployment.
-- GitHub `main` contains the newer nationwide lake directory, Community, Settings, More menu, and the preserved legacy fishing-tool page.
-- Catch logging, photos, GPS, maps, waypoints, trips, tackle, tournaments, and live weather remain preserved in `legacy.html` and the current production build has not been overwritten.
+PittCo Fishing is now deployed to the connected Vercel production project. The public app entry is `https://pittco-fishing.vercel.app` and the current production deployment is `dpl_D2ywLaCFf1rT5kgf2AVdKEkbA1PZ`.
 
-## Current blocker
+GitHub `main` is the source for the approved PittCo pages and data. Vercel serves a small same-origin release loader plus direct-route stubs, allowing all loaded PittCo screens to continue sharing the same browser local storage for catches, trips, tackle, settings, favorites, community data, and private waypoints.
 
-The connected Vercel deployment action is currently exposing an inconsistent schema: the visible tool accepts no arguments, while the underlying action rejects the call unless `target`, `name`, and `files` are supplied. Because a verified preview cannot currently be created through that action, production should not be replaced blindly.
+## Verified release checks
 
-## Release rule
+- Vercel production deployment reports `READY` and targets `production`.
+- Public root returns HTTP 200.
+- Direct Fishing Tools route returns HTTP 200.
+- Direct Community route, including a lake query such as `?lake=al-guntersville`, returns HTTP 200 and preserves the route query for the loaded Community screen.
+- Direct Settings and Profile routes return HTTP 200.
+- Vercel runtime error report for the release window contains no errors.
+- GitHub/Vercel release entry loader is query-safe and supports direct/bookmarked routes.
 
-Only promote the integrated GitHub build after a preview can be loaded and checked for:
+## Working MVP features
 
-- homepage/navigation load
-- Catch/Trips/Tackle/Tournaments access
-- photo capture/upload behavior on iOS Safari
-- geolocation permission flow
-- Leaflet map, catches, waypoints, and boat-ramp overlays
-- live weather
-- nationwide lake search/filter/favorites/recent/home-lake behavior
-- lake deep-links into Community
-- Settings persistence/privacy defaults
+- Catch logging with photos, weight, species, lure, depth, area, date, optional GPS, and saved weather context.
+- Trip journal.
+- Tackle locker.
+- Tournament tracker.
+- Leaflet fishing map with street/satellite layers, catch markers, private waypoints, nearby boat-ramp overlays, and device geolocation.
+- Live weather.
+- Nationwide lake directory/search architecture with state/region search, tier filters, favorites, recent lakes, home lake, geolocation/distance sorting, live lake weather, maps, Community links, and Fishing Tools links.
+- 31 nationwide seed fisheries in `data/lakes.json`, structured so the catalog can expand to thousands of waters without hard-coded page logic.
+- Lake-specific Community boards with reports, catches, tournament talk, tackle/technique posts, questions, lake updates, reactions, saves, local posting, and reporting scaffold.
+- Profile and Settings with angler name, home lake, target bass species, skill level, preferred techniques, units, appearance, privacy controls, notifications, and JSON data export.
+- Exact catch GPS and private waypoints remain private by default. Community does not automatically pull exact coordinates from catches or waypoints.
+- Premium PittCo home, drawer/menu navigation, Help/About, and Shopify-ready Merch entry.
+- Social links are configuration-driven and remain disabled when no official URL is supplied.
 
-## Latest integration work
+## Known future/backend work
 
-- Lake directory now supports favorites, recent lakes, geolocation sorting, home-lake synchronization with Settings, and lake profile actions for map, Community, and fishing tools.
-- Community now accepts `?lake=<lake-id-or-name>` deep links and preselects the correct lake board/composer.
-- Community posts use the saved angler profile name when available.
-- Mobile Safari touch/scroll behavior was hardened on new lake/community surfaces.
+The current release is usable as a device-local PittCo MVP. Community posts/reactions/saves are local to the browser until authentication and a shared backend are added. Profiles are device-local rather than cloud accounts. Follow relationships and server-side moderation/report queues are scaffolded concepts, not a live backend service yet.
+
+Merch becomes an external live storefront when an official Shopify/store URL is added to `data/app-config.json`. YouTube, Instagram, Facebook, and TikTok buttons activate only after official PittCo account URLs are configured.
+
+Weather, maps, satellite imagery, boat-ramp lookups, and geolocation depend on their respective browser/public network services and user permissions.
