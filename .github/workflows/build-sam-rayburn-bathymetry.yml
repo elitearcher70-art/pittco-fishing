@@ -1,0 +1,46 @@
+name: Build Sam Rayburn Bathymetry
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build-sam-rayburn-bathymetry.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install GIS runtime
+        run: pip install --disable-pip-version-check geopandas pyogrio shapely pyproj
+      - name: Download official TWDB Sam Rayburn survey
+        run: curl -L --fail --retry 4 --retry-delay 5 -o /tmp/sam-rayburn.zip 'https://www.twdb.texas.gov/surfacewater/surveys/completed/files/SamRayburn/2004-04/Recalculated_2016-12/Shapefiles04r.zip'
+      - name: Convert to mobile contours
+        run: python scripts/ingest-twdb-bathymetry.py --zip /tmp/sam-rayburn.zip --lake tx-sam-rayburn --out data/bathymetry/tx-sam-rayburn.geojson --pool-elevation 164.4 --survey '2004-04 / recalculated 2016-12' --simplify-m 5
+      - name: Validate asset
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('data/bathymetry/tx-sam-rayburn.geojson'); j=json.loads(p.read_text()); meta=j.get('pittco',{}); n=len(j.get('features',[])); size=p.stat().st_size
+          assert n>20, f'too few contours: {n}'
+          assert 0 <= meta.get('min_depth_ft',-1) < meta.get('max_depth_ft',0) <= 200, meta
+          assert size < 95_000_000, f'asset too large: {size}'
+          print(meta,'bytes=',size)
+          PY
+      - name: Mark Sam Rayburn ready
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('data/bathymetry/manifest.json');j=json.loads(p.read_text());j['lakes']['tx-sam-rayburn']['status']='ready';j['lakes']['tx-sam-rayburn']['built_by']='github-actions';p.write_text(json.dumps(j,indent=2)+'\n')
+          PY
+      - name: Commit generated contour asset
+        run: |
+          git config user.name 'pittco-bathymetry-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/bathymetry/tx-sam-rayburn.geojson data/bathymetry/manifest.json
+          git commit -m 'Build Sam Rayburn TWDB bathymetry asset' || exit 0
+          git push
