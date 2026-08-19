@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "purpose": "Registry of verified public bathymetry sources used by PittCo Fishing. A listed survey does not imply navigational-chart suitability.",
+  "providers": {
+    "owrb": {"name":"Oklahoma Water Resources Board","type":"live-map-service","scope":"Oklahoma surveyed reservoirs","units":"feet","navigation":false},
+    "noaa": {"name":"NOAA/NCEI","type":"live-map-service-or-public-dataset","scope":"Great Lakes and covered waters","navigation":false},
+    "wa-ecology": {"name":"Washington State Department of Ecology","type":"live-feature-service","scope":"Surveyed Washington freshwater lakes","navigation":false},
+    "mn-dnr": {"name":"Minnesota DNR","type":"live-map-service","scope":"Covered Minnesota lakes","navigation":false},
+    "usace-ienc": {"name":"U.S. Army Corps of Engineers IENC","type":"live-feature-service","scope":"Supported inland navigation waters","navigation":false},
+    "twdb": {"name":"Texas Water Development Board","type":"per-reservoir-ingest","scope":"TWDB hydrographic reservoir surveys","navigation":false,"note":"Use survey bathymetry as fishing-reference data only; TWDB volumetric survey maps are not intended as recreational boating/fishing maps."}
+  },
+  "lakeCoverage": {
+    "tx-fork": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2013-03","products":["shapefiles","contour-map","final-report"],"priority":1},
+    "tx-sam-rayburn": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2016-12 recalculation of 2004-04 survey","products":["shapefiles","bathymetric-elevation-area-capacity"],"priority":2},
+    "tx-conroe": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2020-10","products":["shapefiles","contour-map","final-report"],"priority":3},
+    "tx-oh-ivie": {"provider":"twdb","status":"research-pending","priority":4},
+    "tx-la-toledo-bend": {"provider":"twdb","status":"research-pending","priority":5},
+    "tx-amistad": {"provider":"twdb","status":"research-pending","priority":6},
+    "tx-falcon": {"provider":"twdb","status":"research-pending","priority":7},
+    "tx-texoma": {"provider":"twdb","status":"research-pending","priority":8},
+    "tx-possum-kingdom": {"provider":"twdb","status":"research-pending","priority":9}
+  }
+}
