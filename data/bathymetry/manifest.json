@@ -17,13 +17,14 @@
     },
     "tx-sam-rayburn": {
       "provider": "twdb",
-      "status": "ingest-ready",
+      "status": "ready",
       "survey": "2004-04 / recalculated 2016-12",
       "reference_pool_ft": 164.4,
       "vertical_datum": "NGVD29",
       "asset": "data/bathymetry/tx-sam-rayburn.geojson",
       "source_kind": "elevation-to-depth",
-      "navigation": false
+      "navigation": false,
+      "built_by": "github-actions"
     }
   }
 }
