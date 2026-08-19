@@ -9,7 +9,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 46
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,24 +24,18 @@ jobs:
       - name: Validate asset
         run: |
           python - <<'PY'
-          import json, pathlib, sys
-          p=pathlib.Path('data/bathymetry/tx-fork.geojson')
-          j=json.loads(p.read_text())
-          meta=j.get('pittco',{})
-          n=len(j.get('features',[])); size=p.stat().st_size
+          import json, pathlib
+          p=pathlib.Path('data/bathymetry/tx-fork.geojson'); j=json.loads(p.read_text()); meta=j.get('pittco',{}); n=len(j.get('features',[])); size=p.stat().st_size
           assert n>20, f'too few contours: {n}'
           assert 0 <= meta.get('min_depth_ft',-1) < meta.get('max_depth_ft',0) <= 150, meta
-          assert size < 90_000_000, f'asset too large for GitHub/mobile: {size}'
-          print(meta, 'bytes=',size)
+          assert size < 90_000_000, f'asset too large: {size}'
+          print(meta,'bytes=',size)
           PY
       - name: Mark Lake Fork ready
         run: |
           python - <<'PY'
-          import json, pathlib
-          p=pathlib.Path('data/bathymetry/manifest.json'); j=json.loads(p.read_text())
-          j['lakes']['tx-fork']['status']='ready'
-          j['lakes']['tx-fork']['built_by']='github-actions'
-          p.write_text(json.dumps(j,indent=2)+'\n')
+          import json,pathlib
+          p=pathlib.Path('data/bathymetry/manifest.json');j=json.loads(p.read_text());j['lakes']['tx-fork']['status']='ready';j['lakes']['tx-fork']['built_by']='github-actions';p.write_text(json.dumps(j,indent=2)+'\n')
           PY
       - name: Commit generated contour asset
         run: |
