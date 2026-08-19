@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "id": "angler",
+      "label": "Angler Profile",
+      "fields": [
+        {"id":"displayName","type":"text","label":"Display name","default":"PittCo Angler"},
+        {"id":"homeLakeId","type":"lake","label":"Home lake","default":"ok-sardis"},
+        {"id":"primarySpecies","type":"select","label":"Primary species","options":["Largemouth Bass","Smallmouth Bass","Spotted Bass","Mixed Bass"],"default":"Largemouth Bass"},
+        {"id":"experience","type":"select","label":"Experience","options":["Beginner","Intermediate","Advanced","Tournament Angler"],"default":"Intermediate"}
+      ]
+    },
+    {
+      "id": "fishing",
+      "label": "Fishing Preferences",
+      "fields": [
+        {"id":"techniques","type":"multi-select","label":"Preferred techniques","options":["Jig","Texas Rig","Crankbait","Spinnerbait","Chatterbait","Topwater","Drop Shot","Carolina Rig","Swimbait","Frog","Punching","Jerkbait"]},
+        {"id":"depthPreference","type":"select","label":"Typical depth","options":["Shallow","Mid-depth","Deep","No preference"],"default":"No preference"},
+        {"id":"units","type":"select","label":"Units","options":["imperial","metric"],"default":"imperial"}
+      ]
+    },
+    {
+      "id": "privacy",
+      "label": "Privacy & Sharing",
+      "fields": [
+        {"id":"catchPrivacy","type":"select","label":"Default catch visibility","options":["private","friends","community"],"default":"private"},
+        {"id":"communityLocationPrecision","type":"select","label":"Community location sharing","options":["none","lake","approximate-area","exact"],"default":"lake"},
+        {"id":"shareWaypoints","type":"toggle","label":"Share private waypoints","default":false},
+        {"id":"shareExactGps","type":"toggle","label":"Share exact catch GPS","default":false}
+      ]
+    },
+    {
+      "id": "notifications",
+      "label": "Notifications",
+      "fields": [
+        {"id":"weatherAlerts","type":"toggle","label":"Weather alerts","default":true},
+        {"id":"tournamentAlerts","type":"toggle","label":"Tournament reminders","default":true},
+        {"id":"communityReplies","type":"toggle","label":"Community replies","default":true},
+        {"id":"lakeReportAlerts","type":"toggle","label":"Favorite-lake fishing reports","default":false}
+      ]
+    }
+  ]
+}
