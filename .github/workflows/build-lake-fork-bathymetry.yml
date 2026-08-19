@@ -1,0 +1,52 @@
+name: Build Lake Fork Bathymetry
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build-lake-fork-bathymetry.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install GIS runtime
+        run: pip install --disable-pip-version-check geopandas pyogrio shapely pyproj
+      - name: Download official TWDB Lake Fork survey
+        run: curl -L --fail --retry 4 --retry-delay 5 -o /tmp/lake-fork.zip 'https://www.twdb.texas.gov/hydro_survey/fork/2009-10/Shapefiles.zip'
+      - name: Convert to mobile contours
+        run: python scripts/ingest-twdb-bathymetry.py --zip /tmp/lake-fork.zip --lake tx-fork --out data/bathymetry/tx-fork.geojson --pool-elevation 403.0 --survey 2009-10 --simplify-m 4
+      - name: Validate asset
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          p=pathlib.Path('data/bathymetry/tx-fork.geojson')
+          j=json.loads(p.read_text())
+          meta=j.get('pittco',{})
+          n=len(j.get('features',[])); size=p.stat().st_size
+          assert n>20, f'too few contours: {n}'
+          assert 0 <= meta.get('min_depth_ft',-1) < meta.get('max_depth_ft',0) <= 150, meta
+          assert size < 90_000_000, f'asset too large for GitHub/mobile: {size}'
+          print(meta, 'bytes=',size)
+          PY
+      - name: Mark Lake Fork ready
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('data/bathymetry/manifest.json'); j=json.loads(p.read_text())
+          j['lakes']['tx-fork']['status']='ready'
+          j['lakes']['tx-fork']['built_by']='github-actions'
+          p.write_text(json.dumps(j,indent=2)+'\n')
+          PY
+      - name: Commit generated contour asset
+        run: |
+          git config user.name 'pittco-bathymetry-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/bathymetry/tx-fork.geojson data/bathymetry/manifest.json
+          git commit -m 'Build Lake Fork TWDB bathymetry asset' || exit 0
+          git push
