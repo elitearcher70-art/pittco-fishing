@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "purpose": "Registry of verified public bathymetry sources used by PittCo Fishing. A listed survey does not imply navigational-chart suitability.",
   "providers": {
     "owrb": {"name":"Oklahoma Water Resources Board","type":"live-map-service","scope":"Oklahoma surveyed reservoirs","units":"feet","navigation":false},
@@ -7,12 +7,12 @@
     "wa-ecology": {"name":"Washington State Department of Ecology","type":"live-feature-service","scope":"Surveyed Washington freshwater lakes","navigation":false},
     "mn-dnr": {"name":"Minnesota DNR","type":"live-map-service","scope":"Covered Minnesota lakes","navigation":false},
     "usace-ienc": {"name":"U.S. Army Corps of Engineers IENC","type":"live-feature-service","scope":"Supported inland navigation waters","navigation":false},
-    "twdb": {"name":"Texas Water Development Board","type":"per-reservoir-ingest","scope":"TWDB hydrographic reservoir surveys","navigation":false,"note":"Use survey bathymetry as fishing-reference data only; TWDB volumetric survey maps are not intended as recreational boating/fishing maps."}
+    "twdb": {"name":"Texas Water Development Board","type":"per-reservoir-ingest","scope":"TWDB hydrographic reservoir surveys","navigation":false,"license":"TWDB grants use/reproduction of original survey material with acknowledgement requested","note":"Use survey bathymetry as reference data only; TWDB warns volumetric survey maps are not intended as recreational boating or fishing maps."}
   },
   "lakeCoverage": {
-    "tx-fork": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2013-03","products":["shapefiles","contour-map","final-report"],"priority":1},
-    "tx-sam-rayburn": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2016-12 recalculation of 2004-04 survey","products":["shapefiles","bathymetric-elevation-area-capacity"],"priority":2},
-    "tx-conroe": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2020-10","products":["shapefiles","contour-map","final-report"],"priority":3},
+    "tx-fork": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2009-10","products":["shapefiles","contour-map","final-report","bathymetric-elevation-area-capacity"],"source":"https://www.twdb.texas.gov/hydro_survey/fork/2009-10/","priority":1},
+    "tx-sam-rayburn": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"2004-04, recalculated 2016-12","products":["shapefiles","contour-map","final-report","bathymetric-elevation-area-capacity"],"source":"https://www.twdb.texas.gov/hydro_survey/samrayburn/2004-04/","priority":2},
+    "tx-conroe": {"provider":"twdb","status":"source-verified-ingest-pending","survey":"verified in TWDB completed-survey catalog; ingest requires exact package selection","products":["shapefiles","contour-map","final-report"],"priority":3},
     "tx-oh-ivie": {"provider":"twdb","status":"research-pending","priority":4},
     "tx-la-toledo-bend": {"provider":"twdb","status":"research-pending","priority":5},
     "tx-amistad": {"provider":"twdb","status":"research-pending","priority":6},
