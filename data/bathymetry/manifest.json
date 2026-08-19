@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "purpose": "Runtime manifest for PittCo lake-bottom contour assets. Only entries with status=ready are loaded by mobile clients.",
+  "lakes": {
+    "tx-fork": {
+      "provider": "twdb",
+      "status": "ingest-ready",
+      "survey": "2009-10",
+      "reference_pool_ft": 403.0,
+      "vertical_datum": "NGVD29",
+      "contour_interval_ft": 5,
+      "asset": "data/bathymetry/tx-fork.geojson",
+      "source_kind": "elevation-to-depth",
+      "navigation": false
+    },
+    "tx-sam-rayburn": {
+      "provider": "twdb",
+      "status": "ingest-ready",
+      "survey": "2004-04 / recalculated 2016-12",
+      "reference_pool_ft": 164.4,
+      "vertical_datum": "NGVD29",
+      "asset": "data/bathymetry/tx-sam-rayburn.geojson",
+      "source_kind": "elevation-to-depth",
+      "navigation": false
+    }
+  }
+}
