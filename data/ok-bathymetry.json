@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "provider": "Oklahoma Water Resources Board",
+  "provider_code": "OWRB",
+  "source": "https://oklahoma.gov/owrb/data-and-maps/bathymetric-mapping.html",
+  "service": "https://owrb.csa.ou.edu/server/rest/services/Surface_Water/LOK_Lakes/MapServer",
+  "note": "Only lakes explicitly verified against OWRB bathymetric survey material are marked available. Unverified lakes must not be presented as depth-covered.",
+  "lakes": {
+    "ok-sardis": {"status":"available","label":"Depth Available","survey":"OWRB bathymetric survey","navigation":false},
+    "ok-mcgee-creek": {"status":"available","label":"Depth Available","survey":"OWRB bathymetric survey","navigation":false},
+    "ok-grand": {"status":"available","label":"Depth Available","survey":"2009","navigation":false},
+    "ok-eufaula": {"status":"unverified","label":"Depth Not Verified","navigation":false},
+    "ok-broken-bow": {"status":"unverified","label":"Depth Not Verified","navigation":false},
+    "ok-tenkiller": {"status":"unverified","label":"Depth Not Verified","navigation":false},
+    "ok-hudson": {"status":"unverified","label":"Depth Not Verified","navigation":false}
+  }
+}
