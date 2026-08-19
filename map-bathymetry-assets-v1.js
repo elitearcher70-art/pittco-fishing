@@ -7,7 +7,7 @@ const RAW='https://raw.githubusercontent.com/elitearcher70-art/pittco-fishing/ma
 let manifest=null,assetLayer=null,loadToken=0;
 async function getManifest(){
   if(manifest)return manifest;
-  try{manifest=await fetch(RAW+'data/bathymetry/manifest.json?v=2',{cache:'no-store'}).then(r=>r.ok?r.json():null)}catch(e){manifest=null}
+  try{manifest=await fetch(RAW+'data/bathymetry/manifest.json?v=3',{cache:'no-store'}).then(r=>r.ok?r.json():null)}catch(e){manifest=null}
   return manifest;
 }
 function styleFeature(f){
@@ -27,7 +27,8 @@ async function loadForLake(){
   if(token!==loadToken||typeof lake==='undefined'||lake.id!==currentLakeId)return false;
   if(!cfg||cfg.status!=='ready'||!cfg.asset)return false;
   try{
-    const gj=await fetch(RAW+cfg.asset+'?v='+encodeURIComponent(cfg.survey||'1'),{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()});
+    const version=cfg.asset_version||cfg.survey||m.version||'1';
+    const gj=await fetch(RAW+cfg.asset+'?v='+encodeURIComponent(version),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()});
     if(token!==loadToken||lake.id!==currentLakeId)return false;
     if(!gj||gj.type!=='FeatureCollection'||!Array.isArray(gj.features)||!gj.features.length)throw Error('empty contour asset');
     removeAsset();
@@ -43,7 +44,7 @@ async function loadForLake(){
 }
 const original=typeof configureDepth==='function'?configureDepth:null;
 if(original){
-  configureDepth=function(){removeAsset();const result=original.apply(this,arguments);setTimeout(loadForLake,0);return result};
+  configureDepth=function(){removeAsset();manifest=null;const result=original.apply(this,arguments);setTimeout(loadForLake,0);return result};
   setTimeout(loadForLake,80);
 }
 })();
