@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "purpose": "Runtime manifest for PittCo lake-bottom contour assets. Only entries with status=ready are loaded by mobile clients.",
   "lakes": {
     "tx-fork": {
@@ -10,6 +10,7 @@
       "vertical_datum": "NGVD29",
       "contour_interval_ft": 5,
       "asset": "data/bathymetry/tx-fork.geojson",
+      "asset_version": "5346d444",
       "source_kind": "elevation-to-depth",
       "navigation": false,
       "built_by": "github-actions"
