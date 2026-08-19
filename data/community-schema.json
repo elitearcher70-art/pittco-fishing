@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "description": "Foundation for lake-specific PittCo community posts without exposing private fishing locations by default.",
+  "postTypes": ["fishing-report","catch","tournament-talk","tackle-technique","question","lake-update"],
+  "locationPrecision": ["none","lake","approximate-area","exact"],
+  "defaults": {
+    "visibility": "community",
+    "locationPrecision": "lake",
+    "includeExactGps": false,
+    "includePrivateWaypoint": false
+  },
+  "post": {
+    "required": ["id","authorId","type","body","createdAt"],
+    "optional": ["lakeId","title","photoUrls","species","lure","weightLb","waterTempF","depthFt","weatherSummary","locationPrecision","approximateArea","replies","reactions","savedCount"]
+  },
+  "moderation": {
+    "reportReasons": ["spam","harassment","unsafe-content","false-information","spot-burning","other"],
+    "supportsMute": true,
+    "supportsBlock": true,
+    "supportsReport": true
+  },
+  "feedModes": ["for-you","following","nearby","favorite-lakes","tournaments","latest"]
+}
