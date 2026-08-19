@@ -2,15 +2,18 @@
 
 ## Current production state
 
-PittCo Fishing is now deployed to the connected Vercel production project. The public app entry is `https://pittco-fishing.vercel.app` and the current production deployment is `dpl_D2ywLaCFf1rT5kgf2AVdKEkbA1PZ`.
+PittCo Fishing is deployed to the connected Vercel production project. The public app entry is `https://pittco-fishing.vercel.app` and the current production deployment is `dpl_74XNXYiqfP5uRWXVfbFgscE3d8QK`.
 
-GitHub `main` is the source for the approved PittCo pages and data. Vercel serves a small same-origin release loader plus direct-route stubs, allowing all loaded PittCo screens to continue sharing the same browser local storage for catches, trips, tackle, settings, favorites, community data, and private waypoints.
+GitHub `main` is the source for the approved PittCo pages and data. Vercel serves a small same-origin release loader plus direct-route stubs, allowing all loaded PittCo screens to share the same browser local storage for catches, trips, tackle, settings, favorites, community data, and private waypoints.
+
+The release loader also feeds the scalable nationwide lake catalog into the preserved core fishing engine at runtime. This removes the old four-lake Oklahoma limitation from catch/trip/tournament lake selectors and the fishing map without rewriting the proven logging, photo, GPS, waypoint, weather, or map code. A lake profile can pass its lake ID directly into Fishing Tools so that lake is prioritized when the fishing map opens.
 
 ## Verified release checks
 
 - Vercel production deployment reports `READY` and targets `production`.
 - Public root returns HTTP 200.
 - Direct Fishing Tools route returns HTTP 200.
+- Direct Lake Directory route returns HTTP 200.
 - Direct Community route, including a lake query such as `?lake=al-guntersville`, returns HTTP 200 and preserves the route query for the loaded Community screen.
 - Direct Settings and Profile routes return HTTP 200.
 - Vercel runtime error report for the release window contains no errors.
@@ -25,6 +28,7 @@ GitHub `main` is the source for the approved PittCo pages and data. Vercel serve
 - Leaflet fishing map with street/satellite layers, catch markers, private waypoints, nearby boat-ramp overlays, and device geolocation.
 - Live weather.
 - Nationwide lake directory/search architecture with state/region search, tier filters, favorites, recent lakes, home lake, geolocation/distance sorting, live lake weather, maps, Community links, and Fishing Tools links.
+- Core fishing-tool lake selectors and map are now populated from the same nationwide catalog rather than an Oklahoma-only hard-coded list.
 - 31 nationwide seed fisheries in `data/lakes.json`, structured so the catalog can expand to thousands of waters without hard-coded page logic.
 - Lake-specific Community boards with reports, catches, tournament talk, tackle/technique posts, questions, lake updates, reactions, saves, local posting, and reporting scaffold.
 - Profile and Settings with angler name, home lake, target bass species, skill level, preferred techniques, units, appearance, privacy controls, notifications, and JSON data export.
