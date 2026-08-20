@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "updated": "2026-08-19",
+  "note": "Static lake specifications are sourced from authoritative agency pages. Time-sensitive values should be fetched live or linked to the official source rather than copied here.",
+  "lakes": {
+    "ok-sardis": {
+      "surface_acres": 14360,
+      "shoreline_miles": 117,
+      "max_depth_ft": 55.2,
+      "volume_acre_ft": 233053,
+      "manager": "U.S. Army Corps of Engineers",
+      "counties": ["Latimer", "Pushmataha"],
+      "fish": ["Largemouth Bass", "Spotted Bass", "White Bass", "Blue Catfish", "Channel Catfish", "White Crappie", "Bluegill", "Walleye"],
+      "facilities": ["Boat ramps", "Campgrounds", "Fishing docks", "Swim beach", "Group camping", "Picnic shelters"],
+      "angler_note": "ODWC identifies Sardis as a strong bass fishery and publishes recurring fishing reports and lake-level links.",
+      "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/sardis-lake",
+      "source_label": "Oklahoma Department of Wildlife Conservation"
+    },
+    "ok-eufaula": {
+      "surface_acres": 105500,
+      "shoreline_miles": 833.9,
+      "max_depth_ft": 90.2,
+      "volume_acre_ft": 2330000,
+      "manager": "U.S. Army Corps of Engineers",
+      "counties": ["McIntosh", "Okmulgee", "Pittsburg", "Haskell"],
+      "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "White Bass", "Black Crappie", "White Crappie", "Blue Catfish", "Channel Catfish", "Flathead Catfish"],
+      "facilities": ["Boat ramps", "Marinas", "Campgrounds", "Swimming areas", "Hiking trails", "Fishing docks"],
+      "regulation_note": "All crappie: 20 per day. Snagging is closed for one mile below Eufaula Dam. Verify current ODWC regulations before fishing.",
+      "angler_note": "ODWC describes Eufaula as Oklahoma's largest reservoir and an excellent crappie, white bass and catfish fishery; Florida-strain largemouth are stocked frequently.",
+      "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/eufaula",
+      "source_label": "Oklahoma Department of Wildlife Conservation"
+    },
+    "ok-broken-bow": {
+      "surface_acres": 14200,
+      "shoreline_miles": 220,
+      "max_depth_ft": 169,
+      "volume_acre_ft": 918070,
+      "manager": "U.S. Army Corps of Engineers / Oklahoma State Parks",
+      "counties": ["McCurtain"],
+      "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "White Bass", "Hybrid Striped Bass", "Black Crappie", "White Crappie", "Channel Catfish", "Flathead Catfish", "Walleye"],
+      "facilities": ["Boat ramps", "Campgrounds", "State park cabins", "Swimming areas", "Hiking trails", "Marina services nearby"],
+      "angler_note": "Deep, clear reservoir with largemouth, smallmouth and spotted bass; ODWC publishes current fishing reports and a USACE lake-level link.",
+      "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/broken-bow-lake",
+      "source_label": "Oklahoma Department of Wildlife Conservation"
+    },
+    "mo-table-rock": {
+      "surface_acres": 43100,
+      "shoreline_miles": 745,
+      "lake_length_miles": 79,
+      "dam_height_ft": 252,
+      "storage_acre_ft": 3462000,
+      "manager": "U.S. Army Corps of Engineers, Little Rock District",
+      "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "Walleye", "Crappie", "Catfish", "Trout downstream"],
+      "facilities": ["Boat ramps", "Marinas", "Campgrounds", "Swimming", "Scuba diving", "Hiking"],
+      "dam_note": "Table Rock Dam has four 50,000-kW generating units. Generation status must be checked live; this profile does not infer whether units are currently generating.",
+      "angler_note": "USACE describes Table Rock as a clear-water Ozark reservoir with extensive marina and recreation access.",
+      "official_report_url": "https://www.swl.usace.army.mil/Missions/Recreation/Lakes/Table-Rock-Lake/",
+      "source_label": "U.S. Army Corps of Engineers"
+    }
+  }
+}
