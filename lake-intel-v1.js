@@ -3,11 +3,11 @@
 'use strict';
 const RAW='https://raw.githubusercontent.com/elitearcher70-art/pittco-fishing/main/';
 let intel=null;
-function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]))}
 function fmt(n,d=0){return Number.isFinite(Number(n))?Number(n).toLocaleString(undefined,{maximumFractionDigits:d}):'—'}
 async function loadIntel(){
   if(intel)return intel;
-  try{intel=await fetch(RAW+'data/lake-intel.json?v=1',{cache:'no-store'}).then(r=>r.ok?r.json():null)}catch(e){intel=null}
+  try{intel=await fetch(RAW+'data/lake-intel.json?v=2',{cache:'no-store'}).then(r=>r.ok?r.json():null)}catch(e){intel=null}
   return intel;
 }
 function ensureStyles(){
