@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-19",
+  "updated": "2026-08-20",
   "note": "Static lake specifications are sourced from authoritative agency pages. Time-sensitive values should be fetched live or linked to the official source rather than copied here.",
   "lakes": {
     "ok-sardis": {
@@ -14,6 +14,19 @@
       "facilities": ["Boat ramps", "Campgrounds", "Fishing docks", "Swim beach", "Group camping", "Picnic shelters"],
       "angler_note": "ODWC identifies Sardis as a strong bass fishery and publishes recurring fishing reports and lake-level links.",
       "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/sardis-lake",
+      "source_label": "Oklahoma Department of Wildlife Conservation"
+    },
+    "ok-mcgee-creek": {
+      "surface_acres": 3709,
+      "shoreline_miles": 80.3,
+      "max_depth_ft": 103.5,
+      "volume_acre_ft": 100146,
+      "manager": "Bureau of Reclamation / Oklahoma State Parks",
+      "counties": ["Atoka"],
+      "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "White Bass", "Flathead Catfish", "Blue Catfish", "Channel Catfish", "Black Crappie", "White Crappie", "Bluegill", "Redear Sunfish"],
+      "facilities": ["Boat ramps", "Campgrounds", "Full RV hookups", "Picnic areas", "State park access"],
+      "angler_note": "ODWC notes annual Florida-strain largemouth stocking and identifies McGee Creek as one of Oklahoma's top spring trophy-bass lakes.",
+      "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/mcgee-creek",
       "source_label": "Oklahoma Department of Wildlife Conservation"
     },
     "ok-eufaula": {
@@ -41,6 +54,20 @@
       "facilities": ["Boat ramps", "Campgrounds", "State park cabins", "Swimming areas", "Hiking trails", "Marina services nearby"],
       "angler_note": "Deep, clear reservoir with largemouth, smallmouth and spotted bass; ODWC publishes current fishing reports and a USACE lake-level link.",
       "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/broken-bow-lake",
+      "source_label": "Oklahoma Department of Wildlife Conservation"
+    },
+    "ok-grand": {
+      "surface_acres": 41749,
+      "shoreline_miles": 460,
+      "max_depth_ft": 133,
+      "volume_acre_ft": 1515414,
+      "manager": "Grand River Dam Authority (GRDA)",
+      "counties": ["Craig", "Delaware", "Mayes", "Ottawa"],
+      "fish": ["Largemouth Bass", "White Bass", "Hybrid Striped Bass", "Black Crappie", "White Crappie", "Paddlefish", "Channel Catfish", "Blue Catfish", "Flathead Catfish"],
+      "facilities": ["Public boat ramps", "State parks", "Campgrounds", "RV hookups", "Fishing docks", "Swimming areas", "Resorts and marinas"],
+      "regulation_note": "All crappie: 15 combined per day with a 10-inch minimum. Special methods restrictions apply below Pensacola Dam; verify current ODWC regulations before fishing.",
+      "angler_note": "Grand is a major Oklahoma tournament fishery. ODWC notes regular hybrid-striped-bass stocking and recent Florida-strain largemouth stocking.",
+      "official_report_url": "https://wildlifedepartment.com/fishing/wheretofish/northeast/grand-lake",
       "source_label": "Oklahoma Department of Wildlife Conservation"
     },
     "mo-table-rock": {
