@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-08-20",
   "note": "Static lake specifications are sourced from authoritative agency pages. Time-sensitive values should be fetched live or linked to the official source rather than copied here.",
   "lakes": {
@@ -7,14 +7,18 @@
       "surface_acres": 14360,
       "shoreline_miles": 117,
       "max_depth_ft": 55.2,
+      "normal_pool_ft": 599,
       "volume_acre_ft": 233053,
+      "dam_name": "Sardis Dam",
+      "dam_height_ft": 101,
       "manager": "U.S. Army Corps of Engineers",
       "counties": ["Latimer", "Pushmataha"],
       "fish": ["Largemouth Bass", "Spotted Bass", "White Bass", "Blue Catfish", "Channel Catfish", "White Crappie", "Bluegill", "Walleye"],
       "facilities": ["Boat ramps", "Campgrounds", "Fishing docks", "Swim beach", "Group camping", "Picnic shelters"],
       "angler_note": "ODWC identifies Sardis as a strong bass fishery and publishes recurring fishing reports and lake-level links.",
       "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/sardis-lake",
-      "source_label": "Oklahoma Department of Wildlife Conservation"
+      "live_water_url": "https://www.swt-wc.usace.army.mil/SARD.lakepage.html",
+      "source_label": "Oklahoma Department of Wildlife Conservation + USACE"
     },
     "ok-mcgee-creek": {
       "surface_acres": 3709,
@@ -33,7 +37,9 @@
       "surface_acres": 105500,
       "shoreline_miles": 833.9,
       "max_depth_ft": 90.2,
+      "normal_pool_ft": 585,
       "volume_acre_ft": 2330000,
+      "dam_name": "Eufaula Dam",
       "manager": "U.S. Army Corps of Engineers",
       "counties": ["McIntosh", "Okmulgee", "Pittsburg", "Haskell"],
       "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "White Bass", "Black Crappie", "White Crappie", "Blue Catfish", "Channel Catfish", "Flathead Catfish"],
@@ -41,20 +47,26 @@
       "regulation_note": "All crappie: 20 per day. Snagging is closed for one mile below Eufaula Dam. Verify current ODWC regulations before fishing.",
       "angler_note": "ODWC describes Eufaula as Oklahoma's largest reservoir and an excellent crappie, white bass and catfish fishery; Florida-strain largemouth are stocked frequently.",
       "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/eufaula",
-      "source_label": "Oklahoma Department of Wildlife Conservation"
+      "live_water_url": "https://www.swt-wc.usace.army.mil/EUFA.lakepage.html",
+      "source_label": "Oklahoma Department of Wildlife Conservation + USACE"
     },
     "ok-broken-bow": {
       "surface_acres": 14200,
       "shoreline_miles": 220,
       "max_depth_ft": 169,
+      "normal_pool_ft": 602.5,
       "volume_acre_ft": 918070,
+      "dam_name": "Broken Bow Dam",
+      "dam_height_ft": 225,
       "manager": "U.S. Army Corps of Engineers / Oklahoma State Parks",
       "counties": ["McCurtain"],
       "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "White Bass", "Hybrid Striped Bass", "Black Crappie", "White Crappie", "Channel Catfish", "Flathead Catfish", "Walleye"],
       "facilities": ["Boat ramps", "Campgrounds", "State park cabins", "Swimming areas", "Hiking trails", "Marina services nearby"],
+      "dam_note": "USACE uses a seasonal conservation-pool schedule; 602.5 ft is the published top-of-conservation-pool reference, not a promise that the target is fixed year-round.",
       "angler_note": "Deep, clear reservoir with largemouth, smallmouth and spotted bass; ODWC publishes current fishing reports and a USACE lake-level link.",
       "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/southeast/broken-bow-lake",
-      "source_label": "Oklahoma Department of Wildlife Conservation"
+      "live_water_url": "https://www.swt-wc.usace.army.mil/BROK.lakepage.html",
+      "source_label": "Oklahoma Department of Wildlife Conservation + USACE"
     },
     "ok-grand": {
       "surface_acres": 41749,
@@ -74,7 +86,9 @@
       "surface_acres": 12900,
       "shoreline_miles": 170,
       "max_depth_ft": 132.7,
+      "normal_pool_ft": 632,
       "volume_acre_ft": 654100,
+      "dam_name": "Tenkiller Ferry Dam",
       "manager": "U.S. Army Corps of Engineers / Oklahoma State Parks",
       "counties": ["Cherokee", "Sequoyah"],
       "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "Black Crappie", "White Crappie", "White Bass", "Blue Catfish", "Channel Catfish", "Flathead Catfish", "Walleye", "Bluegill", "Redear Sunfish"],
@@ -82,7 +96,8 @@
       "regulation_note": "Downstream from Horseshoe Bend boat ramp to the dam, crappie are limited to 15 combined per day with a 10-inch minimum; special method restrictions also apply. Verify current ODWC regulations before fishing.",
       "angler_note": "Tenkiller is a deep, clear Ozark reservoir with rocky bluffs, major lake-level fluctuations and a cool-water tailrace trout fishery below the dam.",
       "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/northeast/tenkiller",
-      "source_label": "Oklahoma Department of Wildlife Conservation"
+      "live_water_url": "https://www.swt-wc.usace.army.mil/TENK.lakepage.html",
+      "source_label": "Oklahoma Department of Wildlife Conservation + USACE"
     },
     "ok-hudson": {
       "surface_acres": 11029,
