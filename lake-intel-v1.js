@@ -38,7 +38,6 @@ async function init(){
     const original=openLake;
     openLake=function(id){const r=original.apply(this,arguments);setTimeout(()=>render(id),0);return r};
   }
-  const params=typeof routeParams==='function'?routeParams():new URLSearchParams(location.search);const id=params&&params.get&&params.get('lake');if(id)setTimeout(()=>{if(typeof openLake==='function')openLake(id)},120);
 }
 init();
 })();
