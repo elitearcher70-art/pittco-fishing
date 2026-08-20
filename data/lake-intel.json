@@ -70,6 +70,34 @@
       "official_report_url": "https://wildlifedepartment.com/fishing/wheretofish/northeast/grand-lake",
       "source_label": "Oklahoma Department of Wildlife Conservation"
     },
+    "ok-tenkiller": {
+      "surface_acres": 12900,
+      "shoreline_miles": 170,
+      "max_depth_ft": 132.7,
+      "volume_acre_ft": 654100,
+      "manager": "U.S. Army Corps of Engineers / Oklahoma State Parks",
+      "counties": ["Cherokee", "Sequoyah"],
+      "fish": ["Largemouth Bass", "Smallmouth Bass", "Spotted Bass", "Black Crappie", "White Crappie", "White Bass", "Blue Catfish", "Channel Catfish", "Flathead Catfish", "Walleye", "Bluegill", "Redear Sunfish"],
+      "facilities": ["Boat ramps", "USACE campgrounds", "Tenkiller State Park", "Full RV hookups", "Swimming areas", "Fishing docks"],
+      "regulation_note": "Downstream from Horseshoe Bend boat ramp to the dam, crappie are limited to 15 combined per day with a 10-inch minimum; special method restrictions also apply. Verify current ODWC regulations before fishing.",
+      "angler_note": "Tenkiller is a deep, clear Ozark reservoir with rocky bluffs, major lake-level fluctuations and a cool-water tailrace trout fishery below the dam.",
+      "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/northeast/tenkiller",
+      "source_label": "Oklahoma Department of Wildlife Conservation"
+    },
+    "ok-hudson": {
+      "surface_acres": 11029,
+      "shoreline_miles": 143.3,
+      "max_depth_ft": 65,
+      "volume_acre_ft": 200185,
+      "manager": "Grand River Dam Authority (GRDA)",
+      "counties": ["Mayes"],
+      "fish": ["Largemouth Bass", "Black Crappie", "White Crappie", "Paddlefish", "White Bass", "Hybrid Striped Bass", "Channel Catfish", "Blue Catfish", "Flathead Catfish"],
+      "facilities": ["Public boat ramps", "Grand Lake State Park access", "Campgrounds", "Marina access"],
+      "regulation_note": "All crappie: 15 combined per day with a 10-inch minimum. Verify current ODWC regulations before fishing.",
+      "angler_note": "GRDA operates Lake Hudson. ODWC lists public ramps at Snowdale, Lions Club, the north end of Kerr Dam, Highway 82, Ray's Cove and Horseshoe, and notes regular hybrid striped bass stocking.",
+      "official_report_url": "https://www.wildlifedepartment.com/fishing/wheretofish/northeast/hudson",
+      "source_label": "Oklahoma Department of Wildlife Conservation"
+    },
     "mo-table-rock": {
       "surface_acres": 43100,
       "shoreline_miles": 745,
