@@ -3,7 +3,7 @@
 'use strict';
 const RAW='https://raw.githubusercontent.com/elitearcher70-art/pittco-fishing/main/';
 let intel=null;
-function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]))}
 function fmt(n,d=0){return Number.isFinite(Number(n))?Number(n).toLocaleString(undefined,{maximumFractionDigits:d}):'—'}
 async function loadIntel(){
   if(intel)return intel;
@@ -30,7 +30,7 @@ function render(id){
     (d.regulation_note?'<div class="intelSection"><b>Regulation note</b><p>'+esc(d.regulation_note)+'</p></div>':'')+
     (d.dam_note?'<div class="intelSection"><b>Dam / generation</b><p>'+esc(d.dam_note)+'</p></div>':'')+
     (d.angler_note?'<div class="intelSection"><b>Angler notes</b><p>'+esc(d.angler_note)+'</p></div>':'')+
-    '<div class="intelSource"><span>Verified static specs • updated '+esc((intel&&intel.updated)||'')+'</span>'+(d.official_report_url?'<a href="'+esc(d.official_report_url)+'" target="_blank" rel="noopener">Official source ↗</a>':'')+'</div>';
+    '<div class="intelSource"><span>'+esc(d.source_label||'Authoritative agency')+' • verified static specs • updated '+esc((intel&&intel.updated)||'')+'</span>'+(d.official_report_url?'<a href="'+esc(d.official_report_url)+'" target="_blank" rel="noopener">Official source ↗</a>':'')+'</div>';
 }
 async function init(){
   ensureStyles();await loadIntel();
