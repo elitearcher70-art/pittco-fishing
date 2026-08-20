@@ -1,1 +1,138 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040406"><title>PittCo Fishing</title><style>html,body{margin:0;background:#040406;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}#boot{min-height:100vh;display:grid;place-items:center;text-align:center}.bootMark{font-size:28px;font-weight:950;letter-spacing:-1px}.bootMark span{color:#a427ff}.muted{color:#aaa5b2;font-size:12px;margin-top:10px}</style></head><body><div id="boot"><div><div class="bootMark">PITTCO <span>FISHING</span></div><div class="muted">Loading PittCo Fishing…</div></div></div><script>const RAW='https://raw.githubusercontent.com/elitearcher70-art/pittco-fishing/main/';const HOME='home-v3.html';const ALLOWED=[HOME,'legacy.html','lake-directory.html','lake-profile.html','community.html','settings.html','profile.html','more.html','more-v2.html','merch.html','help.html','weather.html','map.html'];function parseRoute(v){v=decodeURIComponent(v||HOME);let hash=v.includes('#')?'#'+v.split('#').slice(1).join('#'):'',beforeHash=v.split('#')[0],search=beforeHash.includes('?')?'?'+beforeHash.split('?').slice(1).join('?'):'',file=beforeHash.split('?')[0].replace(/^\.\//,'').replace(/^\//,'');if(!ALLOWED.includes(file))file=HOME;return{file,search,hash,raw:file+search+hash}}function rewriteFetches(html){return html.replaceAll("fetch('/data/lakes.json'","fetch('"+RAW+"data/lakes.json'").replaceAll('fetch(\"/data/lakes.json\"','fetch(\"'+RAW+'data/lakes.json\"').replaceAll("fetch('/data/app-config.json'","fetch('"+RAW+"data/app-config.json'").replaceAll('fetch(\"/data/app-config.json\"','fetch(\"'+RAW+'data/app-config.json\"')}function routeScript(p){const payload=JSON.stringify({search:p.search,hash:p.hash});return '<script>window.__PITTCO_ROUTE='+payload+';window.__PITTCO_ROUTE_SEARCH=window.__PITTCO_ROUTE.search;window.__PITTCO_ROUTE_HASH=window.__PITTCO_ROUTE.hash;<\/script>'}function rewriteLinks(html){return html.replaceAll('href="release-home-v2.html"','href="/"').replaceAll('href="release-home.html"','href="/"').replaceAll('href="home-v3.html"','href="/"').replaceAll('href="lake-directory.html"','href="/?route=lake-directory.html"').replaceAll('href="community.html"','href="/?route=community.html"').replaceAll('href="profile.html"','href="/?route=profile.html"').replaceAll('href="settings.html"','href="/?route=settings.html"').replaceAll('href="more.html"','href="/?route=more.html"').replaceAll('href="merch.html"','href="/?route=merch.html"').replaceAll('href="help.html"','href="/?route=help.html"').replaceAll('href="legacy.html"','href="/?route=legacy.html"').replaceAll('href="legacy.html#catches"','href="/?route=legacy.html%23catches"').replaceAll('href="legacy.html#trips"','href="/?route=legacy.html%23trips"').replaceAll('href="legacy.html#gear"','href="/?route=legacy.html%23gear"').replaceAll('href="legacy.html#tourneys"','href="/?route=legacy.html%23tourneys"').replaceAll('href="/?route=legacy.html%23lakes">View Full Forecast','href="/?route=weather.html">View Full Forecast').replaceAll('href="legacy.html#lakes"','href="/?route=map.html"').replaceAll('href="/?route=legacy.html%23lakes"','href="/?route=map.html"')}function rewritePopularLakeProfiles(html){return html.replace('href=\"/?route=lake-directory.html%3Flake%3D${encodeURIComponent(x.id)}\"','href=\"/?route=lake-profile.html%3Flake%3D${encodeURIComponent(x.id)}\"')}async function load(){let rp=new URLSearchParams(location.search).get('route'),p=parseRoute(rp||HOME);try{let r=await fetch(RAW+p.file+'?v=20260820-native-dam1',{cache:'no-store'});if(!r.ok)throw Error(r.status);let html=await r.text();html=rewriteFetches(html);html=rewriteLinks(html);if(p.file===HOME)html=rewritePopularLakeProfiles(html);html=html.replace(/<head([^>]*)>/i,'<head$1>'+routeScript(p));if(p.file==='map.html')html=html.replace('</body>','<script src="'+RAW+'map-depth-providers-v3.js?v=4"><\/script><script src="'+RAW+'map-bathymetry-assets-v1.js?v=3"><\/script><script src="'+RAW+'ok-depth-coverage-v1.js?v=1"><\/script></body>');if(p.file==='lake-directory.html')html=html.replace('</body>','<script src="'+RAW+'ok-depth-coverage-v1.js?v=1"><\/script><script src="'+RAW+'lake-directory-mapfix-v1.js?v=1"><\/script><script src="'+RAW+'lake-intel-v1.js?v=7"><\/script><script src="'+RAW+'lake-hub-v1.js?v=2"><\/script><script src="'+RAW+'lake-auto-profile-v1.js?v=1"><\/script></body>');document.open();document.write(html);document.close();if(p.hash){let id=p.hash.slice(1);let tries=0,t=setInterval(()=>{tries++;if(typeof window.go==='function'){clearInterval(t);window.go(id)}else if(tries>20)clearInterval(t)},50)}}catch(e){document.getElementById('boot').innerHTML='<div><div class="bootMark">PITTCO <span>FISHING</span></div><div class="muted">Unable to load PittCo. Refresh and try again.</div></div>';console.error(e)}}load();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#040406">
+<title>PittCo Fishing</title>
+<style>
+html,body{margin:0;background:#040406;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#boot{min-height:100vh;display:grid;place-items:center;text-align:center}.bootMark{font-size:28px;font-weight:950;letter-spacing:-1px}.bootMark span{color:#a427ff}.muted{color:#aaa5b2;font-size:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<div id="boot"><div><div class="bootMark">PITTCO <span>FISHING</span></div><div class="muted">Loading PittCo Fishing…</div></div></div>
+<script>
+const RAW='https://raw.githubusercontent.com/elitearcher70-art/pittco-fishing/main/';
+const HOME='home-v3.html';
+const ALLOWED=[HOME,'legacy.html','lake-directory.html','lake-profile.html','community.html','settings.html','profile.html','more.html','more-v2.html','merch.html','help.html','weather.html','map.html'];
+const USACE_CODES={'ok-sardis':'SARD','ok-eufaula':'EUFA','ok-broken-bow':'BROK','ok-tenkiller':'TENK'};
+const AUTH={
+  'ok-grand':{label:'GRDA River Operations',url:'https://stormops.grda.com/riveroperations'},
+  'ok-hudson':{label:'GRDA River Operations',url:'https://stormops.grda.com/riveroperations'},
+  'ok-mcgee-creek':{label:'Bureau of Reclamation',url:'https://www.usbr.gov/projects/index.php?id=351'}
+};
+function parseRoute(v){v=decodeURIComponent(v||HOME);let hash=v.includes('#')?'#'+v.split('#').slice(1).join('#'):'',beforeHash=v.split('#')[0],search=beforeHash.includes('?')?'?'+beforeHash.split('?').slice(1).join('?'):'',file=beforeHash.split('?')[0].replace(/^\.\//,'').replace(/^\//,'');if(!ALLOWED.includes(file))file=HOME;return{file,search,hash,raw:file+search+hash}}
+function rewriteFetches(html){return html.replaceAll("fetch('/data/lakes.json'","fetch('"+RAW+"data/lakes.json'").replaceAll('fetch(\"/data/lakes.json\"','fetch(\"'+RAW+'data/lakes.json\"').replaceAll("fetch('/data/app-config.json'","fetch('"+RAW+"data/app-config.json'").replaceAll('fetch(\"/data/app-config.json\"','fetch(\"'+RAW+'data/app-config.json\"')}
+function routeScript(p){const payload=JSON.stringify({search:p.search,hash:p.hash});return '<script>window.__PITTCO_ROUTE='+payload+';window.__PITTCO_ROUTE_SEARCH=window.__PITTCO_ROUTE.search;window.__PITTCO_ROUTE_HASH=window.__PITTCO_ROUTE.hash;<\/script>'}
+function rewriteLinks(html){return html.replaceAll('href="release-home-v2.html"','href="/"').replaceAll('href="release-home.html"','href="/"').replaceAll('href="home-v3.html"','href="/"').replaceAll('href="lake-directory.html"','href="/?route=lake-directory.html"').replaceAll('href="community.html"','href="/?route=community.html"').replaceAll('href="profile.html"','href="/?route=profile.html"').replaceAll('href="settings.html"','href="/?route=settings.html"').replaceAll('href="more.html"','href="/?route=more.html"').replaceAll('href="merch.html"','href="/?route=merch.html"').replaceAll('href="help.html"','href="/?route=help.html"').replaceAll('href="legacy.html"','href="/?route=legacy.html"').replaceAll('href="legacy.html#catches"','href="/?route=legacy.html%23catches"').replaceAll('href="legacy.html#trips"','href="/?route=legacy.html%23trips"').replaceAll('href="legacy.html#gear"','href="/?route=legacy.html%23gear"').replaceAll('href="legacy.html#tourneys"','href="/?route=legacy.html%23tourneys"').replaceAll('href="/?route=legacy.html%23lakes">View Full Forecast','href="/?route=weather.html">View Full Forecast').replaceAll('href="legacy.html#lakes"','href="/?route=map.html"').replaceAll('href="/?route=legacy.html%23lakes"','href="/?route=map.html"')}
+function rewritePopularLakeProfiles(html){return html.replace('href=\"/?route=lake-directory.html%3Flake%3D${encodeURIComponent(x.id)}\"','href=\"/?route=lake-profile.html%3Flake%3D${encodeURIComponent(x.id)}\"')}
+function eh(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function stat(label,value,cls=''){if(value==null||value==='')return'';return '<div class="stat"><b class="'+cls+'">'+eh(value)+'</b><small>'+eh(label)+'</small></div>'}
+function fmt(n,d=0){const x=Number(n);return Number.isFinite(x)?x.toLocaleString(undefined,{maximumFractionDigits:d}):'—'}
+function replaceInner(html,id,value){const re=new RegExp('(<[^>]+id=["\\\']'+id+'["\\\'][^>]*>)[\\s\\S]*?(<\\/[^>]+>)','i');return html.replace(re,'$1'+value+'$2')}
+async function getJSON(url,opts){const r=await fetch(url,opts||{cache:'no-store'});if(!r.ok)throw Error(r.status);return r.json()}
+async function cwms(name,unit){const q=new URLSearchParams({name,office:'SWT',begin:'PT-30H',timezone:'America/Chicago',format:'json','page-size':'80',unit});const j=await getJSON('https://cwms-data.usace.army.mil/cwms-data/timeseries?'+q.toString(),{cache:'no-store',headers:{Accept:'application/json;version=2'}});return (j.values||[]).filter(v=>Array.isArray(v)&&v[1]!=null&&Number.isFinite(Number(v[1]))).map(v=>[Number(v[0]),Number(v[1])])}
+function latest(a){return a&&a.length?a[a.length-1]:null}
+function prior24(a,t){if(!a||!a.length)return null;const target=t-86400000;let b=a[0],bd=Math.abs(a[0][0]-target);for(const x of a){const d=Math.abs(x[0]-target);if(d<bd){b=x;bd=d}}return b}
+async function hydrateLakeProfile(html,p){
+  html=html.replace(/<script>[\s\S]*?<\/script>/gi,'');
+  const id=new URLSearchParams(p.search||'').get('lake');
+  let lakes=[],intel={},bathy={};
+  try{
+    const a=await Promise.all([
+      getJSON(RAW+'data/lakes.json?v=loader-profile1'),
+      getJSON(RAW+'data/lake-intel.json?v=loader-profile1'),
+      getJSON(RAW+'data/ok-bathymetry.json?v=loader-profile1').catch(()=>({}))
+    ]);
+    lakes=a[0].lakes||[];intel=a[1].lakes||{};bathy=a[2].lakes||{};
+  }catch(e){return replaceInner(replaceInner(html,'name','Lake profile unavailable'),'region','Lake catalog could not be loaded. Refresh and try again.')}
+  const x=lakes.find(v=>v.id===id)||lakes[0];
+  if(!x)return html;
+  const d=intel[x.id]||{},b=bathy[x.id]||null;
+  html=replaceInner(html,'name',eh(x.name));
+  html=replaceInner(html,'state',eh(x.state+' • LAKE PROFILE'));
+  html=replaceInner(html,'region',eh('Everything PittCo has tied to '+x.name+' in one place.'));
+  let specs='';
+  if(d.surface_acres!=null)specs+=stat('Surface area',fmt(d.surface_acres)+' ac');
+  if(d.shoreline_miles!=null)specs+=stat('Shoreline',fmt(d.shoreline_miles,1)+' mi');
+  if(d.max_depth_ft!=null)specs+=stat('Max depth',fmt(d.max_depth_ft,1)+' ft');
+  if(d.normal_pool_ft!=null)specs+=stat('Normal / conservation pool',fmt(d.normal_pool_ft,2)+' ft');
+  if(d.volume_acre_ft!=null)specs+=stat('Volume / storage',fmt(d.volume_acre_ft)+' ac-ft');
+  else if(d.storage_acre_ft!=null)specs+=stat('Volume / storage',fmt(d.storage_acre_ft)+' ac-ft');
+  if(d.dam_height_ft!=null)specs+=stat('Dam height',fmt(d.dam_height_ft)+' ft');
+  html=replaceInner(html,'specGrid',specs||stat('Lake data','Still being verified'));
+  let details='<div class="section"><strong>Managing agency</strong><p>'+eh(d.manager||'Not yet verified')+'</p></div>';
+  if(d.dam_name)details+='<div class="section"><strong>Dam</strong><p>'+eh(d.dam_name)+'</p></div>';
+  if(d.counties&&d.counties.length)details+='<div class="section"><strong>Counties</strong><p>'+eh(d.counties.join(', '))+'</p></div>';
+  details+='<div class="section"><strong>Depth / bathymetry</strong><p class="'+(b&&b.status==='available'?'good':'')+'">'+(b&&b.status==='available'?'Verified public depth contours available':'Verified depth coverage has not yet been confirmed for this lake.')+'</p></div>';
+  if(d.fish&&d.fish.length)details+='<div class="section"><strong>Key fish</strong><div class="chips">'+d.fish.map(v=>'<span class="chip">'+eh(v)+'</span>').join('')+'</div></div>';
+  if(d.facilities&&d.facilities.length)details+='<div class="section"><strong>Access & facilities</strong><div class="chips">'+d.facilities.map(v=>'<span class="chip">'+eh(v)+'</span>').join('')+'</div></div>';
+  if(d.regulation_note)details+='<div class="section"><strong>Regulations</strong><p>'+eh(d.regulation_note)+'</p></div>';
+  if(d.angler_note)details+='<div class="section"><strong>Angler notes</strong><p>'+eh(d.angler_note)+'</p></div>';
+  html=replaceInner(html,'details',details);
+  const map='/?route='+encodeURIComponent('map.html?lake='+x.id),wx='/?route='+encodeURIComponent('weather.html?lake='+x.id);
+  html=html.replace(/id="mapNav" href="[^"]*"/,'id="mapNav" href="'+map+'"').replace(/id="wxNav" href="[^"]*"/,'id="wxNav" href="'+wx+'"');
+  let links='<a class="primary" href="'+map+'">Map + Depth + Ramps</a><a href="'+wx+'">Full Forecast</a>';
+  if(d.official_report_url)links+='<a href="'+eh(d.official_report_url)+'" target="_blank" rel="noopener">Official Fishing Profile ↗</a>';
+  if(d.live_water_url)links+='<a href="'+eh(d.live_water_url)+'" target="_blank" rel="noopener">Official Water ↗</a>';
+  if(AUTH[x.id])links+='<a href="'+eh(AUTH[x.id].url)+'" target="_blank" rel="noopener">'+eh(AUTH[x.id].label)+' ↗</a>';
+  html=replaceInner(html,'links',links);
+
+  let dam='';
+  if(d.dam_name)dam+=stat('Dam',d.dam_name);
+  if(d.normal_pool_ft!=null)dam+=stat('Normal / conservation pool',Number(d.normal_pool_ft).toFixed(2)+' ft');
+  let damNote='Live values are pulled from the managing agency when available.';
+  const code=USACE_CODES[x.id];
+  if(code){
+    try{
+      const a=await Promise.all([
+        cwms(code+'.Elev.Inst.1Hour.0.Ccp-Rev','ft').catch(()=>[]),
+        cwms(code+'.Flow-Res In.Ave.1Hour.1Hour.Rev-Regi-Computed','cfs').catch(()=>[]),
+        cwms(code+'.Flow-Res Out.Ave.1Hour.1Hour.Rev-Regi-Flowgroup','cfs').catch(()=>[])
+      ]);
+      const e=latest(a[0]),i=latest(a[1]),o=latest(a[2]);
+      if(e){
+        const pool=Number(d.normal_pool_ft),delta=Number.isFinite(pool)?e[1]-pool:null,p24=prior24(a[0],e[0]),chg=p24?e[1]-p24[1]:null;
+        dam+=stat('Current lake level',e[1].toFixed(2)+' ft','good');
+        if(delta!=null)dam+=stat('Vs normal pool',(delta>=0?'+':'')+delta.toFixed(2)+' ft');
+        if(chg!=null)dam+=stat('24-hour level change',(chg>=0?'↑ ':'↓ ')+Math.abs(chg).toFixed(2)+' ft');
+      }else dam+=stat('Current lake level','Live value unavailable','warn');
+      if(o){const r=Number(o[1]);dam+=stat('Water release',r>1?'ACTIVE — RELEASING WATER':'NO MEASURABLE RELEASE',r>1?'good':'');dam+=stat('Release flow',Math.round(r).toLocaleString()+' cfs')}else{dam+=stat('Water release','Status unavailable','warn');dam+=stat('Release flow','Live value unavailable')}
+      if(i)dam+=stat('Inflow',Math.round(i[1]).toLocaleString()+' cfs');
+      dam+=stat('Gate / spillway position','Not separately published');
+      const ts=e?e[0]:(o?o[0]:null);damNote='USACE Tulsa District CWMS'+(ts?' • Updated '+new Date(ts).toLocaleString():'')+'. Release status is based on measured reservoir outflow; physical gate position is not inferred.';
+    }catch(e){dam+=stat('Live dam data','Temporarily unavailable','warn');damNote='No stale lake level or release value is substituted. Use the official water source below.'}
+  }else if(AUTH[x.id]){dam+=stat('Live operations','Use official operations source below','warn');damNote='Live operations are not yet pulled directly into PittCo for this authority.'}
+  else{dam+=stat('Live operations','Not available yet','warn')}
+  html=replaceInner(html,'damGrid',dam||stat('Dam data','Not yet verified'));
+  html=replaceInner(html,'damNote',eh(damNote));
+
+  try{
+    const u='https://api.open-meteo.com/v1/forecast?latitude='+x.lat+'&longitude='+x.lon+'&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,surface_pressure,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto';
+    const j=await getJSON(u),c=j.current||{},pressure=Number(c.surface_pressure)*.02953;
+    const cond=Number(c.weather_code)===0?'Sunny':Number(c.weather_code)<=3?'Partly cloudy':Number(c.weather_code)<=48?'Fog':Number(c.weather_code)<=67?'Rain':Number(c.weather_code)<=82?'Showers':'Storms';
+    const wg=stat('Condition',cond+' • '+Math.round(c.temperature_2m)+'°','good')+stat('Feels like',Math.round(c.apparent_temperature)+'°')+stat('Wind',Math.round(c.wind_speed_10m||0)+' mph')+stat('Humidity',Math.round(c.relative_humidity_2m||0)+'%')+stat('Pressure',Number.isFinite(pressure)?pressure.toFixed(2)+' inHg':'—');
+    html=replaceInner(html,'weatherGrid',wg);
+  }catch(e){html=replaceInner(html,'weatherGrid',stat('Live weather','Temporarily unavailable'))}
+  html=replaceInner(html,'ramps','<p class="note">Open Map + Depth + Ramps for the complete ramp layer and current mapped access records.</p>');
+  return html;
+}
+async function load(){
+  const rp=new URLSearchParams(location.search).get('route'),p=parseRoute(rp||HOME);
+  try{
+    const r=await fetch(RAW+p.file+'?v=20260820-loader-profile1',{cache:'no-store'});if(!r.ok)throw Error(r.status);
+    let html=await r.text();html=rewriteFetches(html);html=rewriteLinks(html);
+    if(p.file===HOME)html=rewritePopularLakeProfiles(html);
+    if(p.file==='lake-profile.html')html=await hydrateLakeProfile(html,p);
+    html=html.replace(/<head([^>]*)>/i,'<head$1>'+routeScript(p));
+    if(p.file==='map.html')html=html.replace('</body>','<script src="'+RAW+'map-depth-providers-v3.js?v=4"><\/script><script src="'+RAW+'map-bathymetry-assets-v1.js?v=3"><\/script><script src="'+RAW+'ok-depth-coverage-v1.js?v=1"><\/script></body>');
+    if(p.file==='lake-directory.html')html=html.replace('</body>','<script src="'+RAW+'ok-depth-coverage-v1.js?v=1"><\/script><script src="'+RAW+'lake-directory-mapfix-v1.js?v=1"><\/script><script src="'+RAW+'lake-intel-v1.js?v=7"><\/script><script src="'+RAW+'lake-hub-v1.js?v=2"><\/script><script src="'+RAW+'lake-auto-profile-v1.js?v=1"><\/script></body>');
+    document.open();document.write(html);document.close();
+    if(p.hash){let id=p.hash.slice(1),tries=0,t=setInterval(()=>{tries++;if(typeof window.go==='function'){clearInterval(t);window.go(id)}else if(tries>20)clearInterval(t)},50)}
+  }catch(e){document.getElementById('boot').innerHTML='<div><div class="bootMark">PITTCO <span>FISHING</span></div><div class="muted">Unable to load PittCo. Refresh and try again.</div></div>';console.error(e)}
+}
+load();
+</script>
+</body>
+</html>
