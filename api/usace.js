@@ -50,7 +50,8 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
   res.setHeader('Cache-Control','s-maxage=300, stale-while-revalidate=900');
   if(req.method==='OPTIONS'){res.status(204).end();return;}
-  const id=String(req.query&&req.query.lake||'');
+  const url=new URL(req.url||'/', 'https://pittco.local');
+  const id=String(url.searchParams.get('lake')||'');
   const lake=LAKES[id];
   if(!lake){res.status(404).json({ok:false,error:'Unsupported USACE lake'});return;}
   try{
