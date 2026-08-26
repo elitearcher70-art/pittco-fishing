@@ -1,0 +1,89 @@
+name: PittCo System Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  system-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify critical files
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            index.html
+            home-v3.html
+            home-intel-v1.js
+            home-lake-profile-links-v1.js
+            home-polish-v1.css
+            catch-privacy-v1.js
+            api/weather.js
+            api/usace.js
+          )
+          for file in "${required[@]}"; do
+            test -s "$file" || { echo "Missing or empty critical file: $file"; exit 1; }
+          done
+
+      - name: JavaScript syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            echo "Checking $file"
+            node --check "$file"
+          done < <(find . -type f -name '*.js' \
+            -not -path './node_modules/*' \
+            -not -path './.git/*' -print0)
+
+      - name: Validate app entry routing
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Eq 'home-v3\.html|location|href' index.html || {
+            echo 'index.html does not appear to route into the app'; exit 1;
+          }
+
+      - name: Validate weather API contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'module.exports' api/weather.js
+          grep -q 'searchParams' api/weather.js
+          grep -q 'Access-Control-Allow-Origin' api/weather.js
+
+      - name: Validate USACE API contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'module.exports' api/usace.js
+          grep -q "searchParams.get('lake')" api/usace.js
+          grep -q 'Access-Control-Allow-Origin' api/usace.js
+
+      - name: Validate key app features are still referenced
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -qiE 'lake|map|weather|catch' home-v3.html
+          grep -qiE 'lake|profile' home-lake-profile-links-v1.js
+          grep -qiE 'catch|privacy' catch-privacy-v1.js
+
+      - name: System check passed
+        run: echo 'PittCo Fishing core regression checks passed.'
