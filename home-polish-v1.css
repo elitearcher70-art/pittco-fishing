@@ -1,0 +1,69 @@
+:root{--p:#a62cff;--p2:#d26bff;--bg:#030305;--card:#0b0b10;--card2:#111118;--muted:#b9b2c0;--line:#2a2630;--line2:#5d376f;--shadow:0 18px 44px rgba(0,0,0,.42)}
+body{background:radial-gradient(circle at 50% -10%,#17101e 0,#030305 28%,#030305 100%)}
+.app{max-width:760px;padding-bottom:104px}
+.hero{height:354px;border-radius:0 0 28px 28px;background-position:center 50%;box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.hero:before{background:linear-gradient(180deg,rgba(2,2,4,.58) 0%,rgba(2,2,4,.08) 38%,rgba(3,3,5,.52) 72%,#030305 100%)}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:110px;background:linear-gradient(180deg,transparent,#030305);pointer-events:none}
+.topbar{left:16px;right:16px;top:max(14px,env(safe-area-inset-top));align-items:flex-start}
+.topright{gap:8px}
+.iconBtn{width:44px;height:44px;border:1px solid rgba(255,255,255,.11);background:rgba(8,7,11,.56);box-shadow:0 7px 22px rgba(0,0,0,.25);font-size:20px}
+.iconBtn:active{transform:scale(.96)}
+.logo{top:max(12px,env(safe-area-inset-top));width:min(44vw,230px);filter:drop-shadow(0 8px 18px rgba(0,0,0,.75))}
+.greet{left:20px;right:20px;bottom:31px}
+.greet .back{font-size:17px;font-weight:760;letter-spacing:-.01em;color:#f3eef6}
+.greet .name{font-size:38px;line-height:1.02;color:var(--p2);font-weight:900;font-style:normal;font-family:inherit;letter-spacing:-.035em;margin-top:3px;text-shadow:0 4px 18px rgba(166,44,255,.18)}
+.greet .sub{font-size:13px;color:#d4ccd8;margin-top:8px}
+.content{padding:0 16px}
+.weather{margin-top:-8px;position:relative;z-index:5;background:linear-gradient(145deg,rgba(24,17,31,.98),rgba(8,8,13,.98) 72%);border:1px solid rgba(174,83,214,.52);border-radius:20px;padding:15px 14px 12px;box-shadow:var(--shadow)}
+.wxgrid{grid-template-columns:1.28fr repeat(3,.78fr)}
+.mainwx{gap:10px;padding-right:10px}
+.sun{font-size:34px}
+.temp{font-size:39px;letter-spacing:-.045em}
+.cond{font-size:12px;margin-top:5px}
+.feel{font-size:11px;color:#cfc7d4;margin-top:3px}
+.wxcell{border-left:1px solid rgba(255,255,255,.1);padding:4px 5px;min-width:0}
+.wi{font-size:20px}
+.wxcell b{font-size:12px;margin-top:5px}
+.wxcell small{font-size:9px;line-height:1.15;color:#aaa3b0;margin-top:3px;text-transform:uppercase;letter-spacing:.04em}
+.forecast{gap:10px;margin-top:11px;background:rgba(5,5,8,.72);border:1px solid var(--line);border-radius:12px;padding:9px 10px}
+.pressure{font-size:10px;color:#bdb5c3;min-width:0}
+.pressure b{font-size:12px;margin-bottom:2px}
+.forecast a{font-size:10px;white-space:nowrap;background:linear-gradient(180deg,#922dd0,#5c168e);border:1px solid rgba(190,99,232,.55);border-radius:10px;padding:9px 10px;box-shadow:0 5px 14px rgba(111,30,162,.22)}
+.section{margin:20px 1px 9px}
+.section b{font-size:17px;letter-spacing:-.015em}
+.section a{font-size:11px;color:#d05cff}
+.quick{gap:9px}
+.quick a{height:88px;background:linear-gradient(145deg,#111117,#08080c);border:1px solid var(--line);border-radius:16px;gap:7px;font-size:11px;font-weight:720;box-shadow:0 7px 18px rgba(0,0,0,.18)}
+.quick a:active,.promo:active,.lake:active,.recent:active{transform:scale(.985)}
+.quick svg{width:28px;height:28px;stroke:#bb4cff}
+.recent{grid-template-columns:1.08fr 1.5fr;gap:10px;min-height:142px;background:linear-gradient(125deg,#15101d,#09090e);border:1px solid rgba(139,62,171,.62);border-radius:18px;padding:7px;box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.catchPic{border-radius:13px;background:linear-gradient(145deg,#151820,#0c0e13);font-size:38px}
+.recentInfo{padding:8px 7px 8px 0}
+.recentInfo h3{font-size:15px;margin-bottom:8px}
+.recentInfo p{font-size:11px;line-height:1.3;color:#ddd5e2;margin:7px 0}
+.chev{right:3px;font-size:27px;color:#b66fe0}
+.lakeRow{gap:10px;margin-left:-1px;padding:1px 1px 5px;scroll-snap-type:x proximity}
+.lake{min-width:138px;height:152px;border:1px solid var(--line);border-radius:15px;background:#09090d;box-shadow:0 8px 18px rgba(0,0,0,.2);scroll-snap-align:start}
+.lakeArt{height:88px}
+.lake:after{content:"";position:absolute;left:0;right:0;top:58px;height:32px;background:linear-gradient(180deg,transparent,rgba(9,9,13,.82));pointer-events:none}
+.heart{right:8px;top:6px;font-size:22px;z-index:2;text-shadow:0 2px 8px #000}
+.lakeText{padding:8px 9px}
+.lakeText b{font-size:12px;line-height:1.15}
+.lakeText small{font-size:9px;color:#aaa3af;margin-top:3px}
+.rating{right:8px;bottom:8px;font-size:10px}
+.promos{gap:10px;margin-top:14px}
+.promo{min-height:74px;border:1px solid rgba(112,57,134,.68);border-radius:15px;background:linear-gradient(145deg,#111018,#08080d);gap:10px;padding:11px 12px;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.promo svg{width:28px;height:28px;flex:0 0 auto}
+.promo b{font-size:12px}
+.promo small{font-size:9px;line-height:1.3;color:#bdb5c3;margin-top:4px}
+.nav{background:rgba(6,6,8,.92);border-top:1px solid rgba(255,255,255,.08);padding-top:7px;box-shadow:0 -12px 30px rgba(0,0,0,.26)}
+.nav a{font-size:9px;font-weight:650}
+.nav svg{width:22px;height:22px;margin-bottom:4px}
+.catchNav{margin-top:-24px}
+.catchNav .plus{width:56px;height:56px;font-size:35px;border:1px solid rgba(225,153,255,.7);box-shadow:0 9px 27px rgba(143,36,212,.35)}
+.panel{background:linear-gradient(180deg,#0d0b11,#07070a);border-right:1px solid rgba(166,44,255,.35);padding-top:max(16px,env(safe-area-inset-top))}
+.menu a{padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px}
+@media(max-width:430px){.hero{height:338px}.logo{width:45vw}.greet{left:17px;bottom:29px}.greet .name{font-size:35px}.content{padding:0 12px}.weather{padding:13px 11px 11px}.wxgrid{grid-template-columns:1.2fr repeat(3,.76fr)}.temp{font-size:36px}.sun{font-size:31px}.quick{gap:7px}.quick a{height:84px;border-radius:14px}.quick svg{width:26px;height:26px}.promos{gap:8px}}
+@media(max-width:360px){.hero{height:326px}.greet .back{font-size:16px}.greet .name{font-size:32px}.greet .sub{font-size:12px}.weather{padding:12px 9px 10px}.mainwx{gap:6px;padding-right:5px}.sun{font-size:27px}.temp{font-size:33px}.wxcell{padding:3px}.wxcell small{font-size:8px}.forecast{padding:8px}.forecast a{padding:8px;font-size:9px}.quick a{font-size:10px}.promo{padding:10px}}
+@media(min-width:700px){.hero{height:390px;border-radius:0 0 32px 32px}.content{padding:0 22px}.greet{left:26px}.weather{margin-top:-12px}.quick a{height:96px}.lake{min-width:150px;height:160px}.lakeArt{height:94px}}
+@media(prefers-reduced-motion:no-preference){.quick a,.promo,.lake,.recent,.iconBtn{transition:transform .12s ease,border-color .16s ease,background .16s ease}}
