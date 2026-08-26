@@ -66,7 +66,7 @@ module.exports=async function handler(req,res){
     const newestTs=Math.max(e?e[0]:0,i?i[0]:0,o?o[0]:0)||null;
     const fresh=freshness(newestTs);
     const p=e?nearest24(elev,e[0]):null;
-    const usable=fresh.status!=='UNAVAILABLE';
+    const usable=fresh.status==='LIVE';
     const level=usable&&e?e[1]:null;
     const release=usable&&o?o[1]:null;
     res.status(200).json({
