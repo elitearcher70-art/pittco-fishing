@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040406"><title>PittCo Fishing</title><style>html,body{margin:0;background:#040406;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}#boot{min-height:100vh;display:grid;place-items:center;text-align:center}.mark{font-size:28px;font-weight:950}.mark span{color:#a427ff}.sub{font-size:12px;color:#aaa5b2;margin-top:8px}</style></head><body><div id="boot"><div><div class="mark">PITTCO <span>FISHING</span></div><div class="sub">Loading current app…</div></div></div><script>
+const RAW='https://raw.githubusercontent.com/elitearcher70-art/pittco-fishing/main/';
+const HOME='home-v3.html';
+const ALLOWED=new Set([HOME,'legacy.html','lake-directory.html','lake-profile.html','community.html','settings.html','profile.html','more.html','more-v2.html','merch.html','help.html','weather.html','map.html']);
+function parseRoute(v){v=decodeURIComponent(v||HOME);let hash=v.includes('#')?'#'+v.split('#').slice(1).join('#'):'',pre=v.split('#')[0],search=pre.includes('?')?'?'+pre.split('?').slice(1).join('?'):'',file=pre.split('?')[0].replace(/^\.\//,'').replace(/^\//,'');if(!ALLOWED.has(file))file=HOME;return{file,search,hash}}
+function isExternal(v){return /^(?:[a-z]+:|\/\/|#|data:|blob:)/i.test(v||'')}
+function rawAsset(v){if(!v||isExternal(v)||v.startsWith('/api/'))return v;return RAW+v.replace(/^\.\//,'').replace(/^\//,'')}
+function rewriteAssets(h){
+ h=h.replace(/\bsrc=(['"])([^'"]+)\1/gi,(m,q,v)=>'src='+q+rawAsset(v)+q);
+ h=h.replace(/\bhref=(['"])([^'"]+\.css(?:\?[^'"]*)?)\1/gi,(m,q,v)=>'href='+q+rawAsset(v)+q);
+ h=h.replace(/url\((['"]?)(?!https?:|data:|\/\/)([^)'"\s]+)\1\)/gi,(m,q,v)=>'url('+q+rawAsset(v)+q+')');
+ return h;
+}
+function rewriteFetches(h){
+ h=h.replace(/fetch\((['"])\/data\//g,'fetch($1'+RAW+'data/');
+ h=h.replace(/fetch\((['"])data\//g,'fetch($1'+RAW+'data/');
+ return h;
+}
+function rewriteLinks(h){
+ const routes=['lake-directory.html','community.html','profile.html','settings.html','more.html','more-v2.html','merch.html','help.html','weather.html','map.html'];
+ h=h.replaceAll('href="home-v3.html"','href="/"').replaceAll("href='home-v3.html'","href='/'");
+ routes.forEach(f=>{h=h.replaceAll('href="'+f+'"','href="/?route='+encodeURIComponent(f)+'"').replaceAll("href='"+f+"'","href='/?route="+encodeURIComponent(f)+"'")});
+ ['catches','trips','gear','tourneys'].forEach(x=>{h=h.replaceAll('href="legacy.html#'+x+'"','href="/?route=legacy.html%23'+x+'"').replaceAll("href='legacy.html#"+x+"'","href='/?route=legacy.html%23"+x+"'")});
+ h=h.replaceAll('href="legacy.html#lakes"','href="/?route=map.html"').replaceAll("href='legacy.html#lakes'","href='/?route=map.html'");
+ h=h.replaceAll('href="legacy.html"','href="/?route=legacy.html"').replaceAll("href='legacy.html'","href='/?route=legacy.html'");
+ return h;
+}
+function injectRoute(h,p){const payload=JSON.stringify({search:p.search,hash:p.hash});return h.replace(/<head([^>]*)>/i,'<head$1><script>window.__PITTCO_ROUTE='+payload+';window.__PITTCO_ROUTE_SEARCH=window.__PITTCO_ROUTE.search;window.__PITTCO_ROUTE_HASH=window.__PITTCO_ROUTE.hash;<\\/script>')}
+function injectCurrentExtras(h,p){
+ if(p.file===HOME)h=h.replace('</head>','<link rel="stylesheet" href="'+RAW+'ui-polish-v2.css?v=3"></head>');
+ if(p.file==='map.html')h=h.replace('</body>','<script src="'+RAW+'map-depth-providers-v3.js?v=5"><\\/script><script src="'+RAW+'map-bathymetry-assets-v1.js?v=4"><\\/script><script src="'+RAW+'ok-depth-coverage-v1.js?v=2"><\\/script></body>');
+ if(p.file==='lake-directory.html')h=h.replace('</body>','<script src="'+RAW+'ok-depth-coverage-v1.js?v=2"><\\/script></body>');
+ if(p.file==='lake-profile.html'){
+  h=h.replace('</head>','<link rel="stylesheet" href="'+RAW+'ui-polish-v2.css?v=3"></head>');
+  const boot=`<script src="${RAW}lake-command-center-v1.js?v=3"><\\/script><script src="${RAW}lake-command-center-ui-v2.js?v=3"><\\/script><script>(async function(){try{var rs=window.__PITTCO_ROUTE_SEARCH||'',id=new URLSearchParams(rs).get('lake');if(!id)return;var j=await fetch('${RAW}data/lakes.json?v=cmd3',{cache:'no-store'}).then(r=>r.json()),lake=(j.lakes||[]).find(x=>x.id===id);if(!lake||!window.PittCoLakeCommandUI)return;var wx={},us={};try{var w=await fetch('/api/weather?lat='+encodeURIComponent(lake.lat)+'&lon='+encodeURIComponent(lake.lon),{cache:'no-store'}).then(r=>r.json()),c=w.current||{};wx={wind:Number(c.wind_speed_10m),pressure:Number(c.surface_pressure)*.02953,code:Number(c.weather_code),temp:Number(c.temperature_2m)}}catch(e){}try{if(/^ok-(sardis|eufaula|broken-bow|tenkiller)$/.test(id))us=await fetch('/api/usace?lake='+encodeURIComponent(id),{cache:'no-store'}).then(r=>r.json())}catch(e){}window.PittCoLakeCommandUI.setLake(lake);window.PittCoLakeCommandUI.setWeather(wx);window.PittCoLakeCommandUI.setUsace(us)}catch(e){console.error('Command Center',e)}})();<\\/script>`;
+  h=h.replace('</body>',boot+'</body>');
+ }
+ return h;
+}
+async function load(){const p=parseRoute(new URLSearchParams(location.search).get('route')||HOME);try{const r=await fetch(RAW+p.file+'?v=router3-'+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(r.status);let h=await r.text();h=rewriteLinks(rewriteFetches(rewriteAssets(h)));h=injectRoute(h,p);h=injectCurrentExtras(h,p);document.open();document.write(h);document.close();if(p.hash){let n=0,t=setInterval(()=>{n++;let id=p.hash.slice(1);if(typeof window.go==='function'){clearInterval(t);window.go(id)}else{let el=document.getElementById(id);if(el){clearInterval(t);el.scrollIntoView()}else if(n>30)clearInterval(t)}},75)}}catch(e){document.getElementById('boot').innerHTML='<div><div class="mark">PITTCO <span>FISHING</span></div><div class="sub">Unable to load the current app. Refresh and try again.</div></div>';console.error(e)}}
+load();
+</script></body></html>
