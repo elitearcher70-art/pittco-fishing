@@ -31,7 +31,7 @@ try{
  h=h.replace(/<head([^>]*)>/i,'<head$1><base href="'+ORIGIN+'"><script>window.__PITTCO_ROUTE='+payload+';window.__PITTCO_ROUTE_SEARCH=window.__PITTCO_ROUTE.search;window.__PITTCO_ROUTE_HASH=window.__PITTCO_ROUTE.hash;<\/script>');
  h=await inlineAssets(h);h=media(h);h=await extra(h,p);
  if(p.hash){h=h.replace('</body>','<script>window.addEventListener("load",function(){var id='+JSON.stringify(p.hash.slice(1))+',n=0,t=setInterval(function(){n++;if(typeof window.go==="function"){clearInterval(t);window.go(id)}else{var e=document.getElementById(id);if(e){clearInterval(t);e.scrollIntoView()}else if(n>30)clearInterval(t)}},75)});<\/script></body>')}
- const u=URL.createObjectURL(new Blob([h],{type:'text/html'}));location.replace(u);
+ document.open();document.write(h);document.close();
 }catch(e){document.getElementById('boot').innerHTML='<div><div class="mark">PITTCO <span>FISHING</span></div><div class="sub">App load failed. '+String(e.message||e)+'</div></div>';console.error(e)}
 })();
 </script></body></html>
