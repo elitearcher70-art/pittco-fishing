@@ -12,16 +12,16 @@ function dataFetches(h){return h.replace(/fetch\((['"])\/data\//g,'fetch($1'+RAW
 function media(h){return h.replace(/\bsrc=(['"])(?!https?:|\/\/|data:|blob:)([^'"]+)\1/gi,(m,q,v)=>'src='+q+RAW+v.replace(/^\.\//,'').replace(/^\//,'')+q)}
 async function inlineAssets(h){
  const re=/<script\b([^>]*?)\bsrc=(["'])([^"']+)\2([^>]*)><\/script>/gi;const ms=Array.from(h.matchAll(re));
- for(const m of ms){let s=m[3];if(/^(?:https?:)?\/\//i.test(s)&&!s.startsWith(RAW))continue;let u=s.startsWith(RAW)?s:RAW+s.replace(/^\.\//,'').replace(/^\//,'');try{let c=await text(u);c=c.replace(/<\/script/gi,'<\\/script');h=h.replace(m[0],'<script>'+c+'</script>')}catch(e){console.warn(e)}}
+ for(const m of ms){let s=m[3];if(/^(?:https?:)?\/\//i.test(s)&&!s.startsWith(RAW))continue;let u=s.startsWith(RAW)?s:RAW+s.replace(/^\.\//,'').replace(/^\//,'');try{let c=await text(u);c=c.replace(/<\/script/gi,'<\\/script');h=h.replace(m[0],'<script>'+c+'<\/script>')}catch(e){console.warn(e)}}
  const cr=/<link\b[^>]*rel=(["'])stylesheet\1[^>]*href=(["'])([^"']+)\2[^>]*>/gi;const cs=Array.from(h.matchAll(cr));
  for(const m of cs){let s=m[3];if(/^(?:https?:)?\/\//i.test(s)&&!s.startsWith(RAW))continue;let u=s.startsWith(RAW)?s:RAW+s.replace(/^\.\//,'').replace(/^\//,'');try{h=h.replace(m[0],'<style>'+await text(u)+'</style>')}catch(e){console.warn(e)}}
  return h;
 }
 async function extra(h,p){
  if(p.file===HOME){try{h=h.replace('</head>','<style>'+await text(RAW+'ui-polish-v2.css')+'</style></head>')}catch(e){}}
- if(p.file==='map.html'){for(const f of ['map-depth-providers-v3.js','map-bathymetry-assets-v1.js','ok-depth-coverage-v1.js']){try{let c=(await text(RAW+f)).replace(/<\/script/gi,'<\\/script');h=h.replace('</body>','<script>'+c+'</script></body>')}catch(e){}}}
- if(p.file==='lake-directory.html'){try{let c=(await text(RAW+'ok-depth-coverage-v1.js')).replace(/<\/script/gi,'<\\/script');h=h.replace('</body>','<script>'+c+'</script></body>')}catch(e){}}
- if(p.file==='lake-profile.html'){for(const f of ['lake-command-center-v1.js','lake-command-center-ui-v2.js']){try{let c=(await text(RAW+f)).replace(/<\/script/gi,'<\\/script');h=h.replace('</body>','<script>'+c+'</script></body>')}catch(e){}}
+ if(p.file==='map.html'){for(const f of ['map-depth-providers-v3.js','map-bathymetry-assets-v1.js','ok-depth-coverage-v1.js']){try{let c=(await text(RAW+f)).replace(/<\/script/gi,'<\\/script');h=h.replace('</body>','<script>'+c+'<\/script></body>')}catch(e){}}}
+ if(p.file==='lake-directory.html'){try{let c=(await text(RAW+'ok-depth-coverage-v1.js')).replace(/<\/script/gi,'<\\/script');h=h.replace('</body>','<script>'+c+'<\/script></body>')}catch(e){}}
+ if(p.file==='lake-profile.html'){for(const f of ['lake-command-center-v1.js','lake-command-center-ui-v2.js']){try{let c=(await text(RAW+f)).replace(/<\/script/gi,'<\\/script');h=h.replace('</body>','<script>'+c+'<\/script></body>')}catch(e){}}}
  return h;
 }
 try{
