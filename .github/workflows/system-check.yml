@@ -53,6 +53,9 @@ jobs:
             -not -path './node_modules/*' \
             -not -path './.git/*' -print0)
 
+      - name: Validate startup HTML and embedded JavaScript
+        run: python3 scripts/check-startup.py
+
       - name: Validate app entry routing
         shell: bash
         run: |
